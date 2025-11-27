@@ -3,7 +3,7 @@ SMART R4 – RFID Attendance System
 Using Arduino UNO R4 WiFi & MFRC522
 
 Course: CS 445 – Embedded Systems
-Instructor: Dr. Ali Al-Sinayyid
+Instructor: Dr. Ali Al-Sinayyid.
 Student: Shikhar Pandey
 Institution: West Virginia State University
 
