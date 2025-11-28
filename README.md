@@ -7,6 +7,7 @@ Instructor: Dr. Ali Al-Sinayyid.
 Student: Shikhar Pandey
 Institution: West Virginia State University
 
+
 Project Overview
 
 SMART R4 is an RFID-based attendance system developed using the Arduino UNO R4 WiFi and the MFRC522 RFID reader. When an RFID card is tapped, the system reads the card’s UID, verifies whether it is authorized, and then displays either “Access Granted” or “Access Denied” on the Serial Monitor.
@@ -82,7 +83,7 @@ Functionality tested through the Arduino IDE Serial Monitor
 
 UIDs simulated and validated
 
-SPI communication verified between Arduino and MFRC522
+SPI communication verified between Arduino and MFRC522.
 
 Full system flow tested virtually before hardware deployment
 
