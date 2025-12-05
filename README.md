@@ -1,4 +1,4 @@
-SMART R4 – RFID Attendance System
+Hardware Project SMART R4 Real Embended  – RFID Attendance System
 
 Using Arduino UNO R4 WiFi & MFRC522
 
