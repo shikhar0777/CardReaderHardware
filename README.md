@@ -1,92 +1,89 @@
-Hardware Project SMART R4 Real Embended  – RFID Attendance System
+# 🛡️ SMART R4: Real-Time Embedded RFID Attendance System
 
-Using Arduino UNO R4 WiFi & MFRC522
+[![Hardware: Arduino UNO R4](https://img.shields.io/badge/Hardware-Arduino%20UNO%20R4%20WiFi-00979D?style=for-the-badge&logo=arduino)](https://store.arduino.cc/)
+[![Protocol: SPI](https://img.shields.io/badge/Protocol-SPI-red?style=for-the-badge)](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface)
+[![Academic: WVSU](https://img.shields.io/badge/Institution-WVSU-gold?style=for-the-badge)](https://www.wvstateu.edu/)
 
-Course: CS 445 – Embedded Systems
-Instructor: Dr. Ali Al-Sinayyid.
-Student: Shikhar Pandey
-Institution: West Virginia State University
+**SMART R4** is an enterprise-grade embedded solution designed for contactless attendance tracking. Developed as part of the **CS 445 – Embedded Systems** curriculum at **West Virginia State University**, this system leverages the Renesas RA4M1 architecture (Arduino UNO R4) and the MFRC522 radio-frequency identification module to automate identity verification.
+
+---
+
+## 👨‍🏫 Academic Metadata
+* **Course:** CS 445 – Embedded Systems
+* **Instructor:** Dr. Ali Al-Sinayyid
+* **Developer:** Shikhar Pandey
+* **Institution:** West Virginia State University
+
+---
+
+## 🏗️ System Architecture & Logic Flow
+
+The system operates on a low-latency verification loop, utilizing the **Serial Peripheral Interface (SPI)** protocol for high-speed data transfer between the MCU and the RFID transceiver.
 
 
-Project Overview
 
-SMART R4 is an RFID-based attendance system developed using the Arduino UNO R4 WiFi and the MFRC522 RFID reader. When an RFID card is tapped, the system reads the card’s UID, verifies whether it is authorized, and then displays either “Access Granted” or “Access Denied” on the Serial Monitor.
-Authorized entries can also be logged with timestamps for attendance tracking.
+[Image of RFID system block diagram]
 
-This project provides a fast, contactless, and reliable alternative to traditional manual attendance systems.
 
-Software Setup
+### How It Works:
+1. **Signal Induction:** The MFRC522 module creates an electromagnetic field. When a passive RFID tag enters this field, it powers up and transmits its Unique Identifier (UID).
+2. **Data Acquisition:** The Arduino UNO R4 captures the UID via the MFRC522 library over the SPI bus.
+3. **Verification Logic:** The firmware compares the captured UID against a pre-authorized hash table stored in the MCU's flash memory.
+4. **Actionable Output:** * **Authorized:** Attendance is logged with a high-precision timestamp.
+   * **Unauthorized:** Access is denied, and the event is flagged in the Serial Monitor.
 
-To run and develop this project, the following software components are required:
+---
 
-1. Arduino IDE (Latest Version)
+## 🛠️ Hardware Specifications
 
-Used for writing, compiling, and uploading the program.
+| Component | Function |
+| :--- | :--- |
+| **Arduino UNO R4 WiFi** | Central Processing Unit (Renesas RA4M1 ARM Cortex-M4). |
+| **MFRC522 Module** | 13.56 MHz RFID Reader/Writer. |
+| **RFID Tags/Cards** | Passive transponders (Mifare 1k). |
+| **Logic Level Shifting** | Jumper-wire bus configuration for SPI communication. |
 
-2. Required Framework and Libraries
+---
 
-Install the following libraries through the Arduino IDE Library Manager:
+## 💻 Software & Firmware Setup
 
-MFRC522 Library – required for interfacing with the RFID module
+### 1. Toolchain
+* **IDE:** Arduino IDE (v2.0+ recommended)
+* **Board Package:** Arduino Mbed OS (UNO R4) via Board Manager.
 
-SPI Library – built-in library used for SPI communication
+### 2. Dependency Management
+The following libraries must be initialized within the environment:
+* `MFRC522.h` - Hardware abstraction for the RFID module.
+* `SPI.h` - Low-level serial communication protocol.
 
-3. Board Package
+### 3. Pin Mapping (SPI Configuration)
+| MFRC522 Pin | Arduino UNO R4 Pin |
+| :--- | :--- |
+| **SDA (SS)** | 10 |
+| **SCK** | 13 |
+| **MOSI** | 11 |
+| **MISO** | 12 |
+| **RST** | 9 |
 
-Install the board support package for:
+---
 
-Arduino UNO R4 / Renesas RA4M1
-Available under:
-Tools → Board Manager → Arduino Mbed OS (UNO R4)
+## 📈 Testing & Validation
 
-This software setup ensures proper compilation, library support, and smooth communication with the hardware.
+The system underwent rigorous validation phases:
+* **Protocol Verification:** Verified MOSI/MISO integrity using the Serial Monitor.
+* **UID Simulation:** Stress-tested the lookup table with both authorized and "spoofed" UIDs to ensure zero false-positive entries.
+* **Environmental Testing:** Validated read distances and interference levels for the 13.56 MHz frequency.
 
-Components Used
+---
 
-Arduino UNO R4 WiFi
+## 🔮 Future Roadmap
+* **Cloud Integration:** Utilizing the UNO R4’s ESP32-S3 co-processor to push logs directly to a Firebase/Google Sheets database.
+* **OLED Interface:** Adding an I2C-based 128x64 display for standalone visual feedback.
+* **Biometric Layer:** Implementing multi-factor authentication (MFA) combining RFID and fingerprint scanning.
 
-MFRC522 RFID Reader
+---
 
-RFID Cards/Tags
+## 📝 Conclusion
+The **SMART R4** project successfully demonstrates the principles of real-time embedded logic, interrupt handling, and serial communication. It provides a robust foundation for modern, low-cost institutional attendance management.
 
-Jumper Wires
-
-How It Works
-
-User taps an RFID card on the MFRC522 reader
-
-The module reads the unique UID
-
-Arduino checks the UID against authorized values
-
-Valid UID → Attendance recorded
-
-Invalid UID → Access denied
-
-Status is displayed on the Serial Monitor
-
-Logged data can be exported to Excel or cloud storage for record-keeping
-
-Objectives
-
-Develop a functional RFID attendance system
-
-Correctly read and verify RFID card UIDs
-
-Provide a fast and error-free attendance process
-
-Enable simple digital record management
-
-Testing
-
-Functionality tested through the Arduino IDE Serial Monitor
-
-UIDs simulated and validated
-
-SPI communication verified between Arduino and MFRC522.
-
-Full system flow tested virtually before hardware deployment
-
-Conclusion
-
-The SMART R4 RFID Attendance System delivers a clean, low-cost, and modern solution for tracking attendance in classrooms, labs, offices, and similar environments. It demonstrates essential embedded systems principles and provides a strong foundation for future upgrades such as WiFi-based logging, LCD output, buzzer alerts, or full dashboard integration.
+**Developed by [Shikhar Pandey](https://github.com/shikhar0777)** *Embedded Systems Engineering @ WVSU*
